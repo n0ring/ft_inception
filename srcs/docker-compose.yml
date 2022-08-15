@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mariadb:
+    build: requirements/mariadb
+    restart: always
+    env_file: 
+      .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - data-db:/var/lib/mysql
+
+volumes:
+  data-db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/aleksandr/Desktop/21/ft_inception/srcs/db-data
+
+
+
+
+      # change to /home/namina/data/db:/var/lib/mysql
+  # nginx:
+  #   build: requirements/nginx
