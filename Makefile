@@ -14,6 +14,7 @@ build:
 
 up:
 	@mkdir -p srcs/db-data
+	@mkdir -p srcs/wp
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
 
 stop:
@@ -34,11 +35,20 @@ rm: down
 in:
 	docker exec -it $$(docker ps -q) /bin/bash
 
+mariadb: 
+	docker exec -it mariadb bash
+
+nginx: 
+	docker exec -it nginx bash
+
+wp: 
+	docker exec -it wordpress bash
 
 fclean: down rm  
-	echo y | docker system prune
+	docker system prune -a --force
 	docker volume rm -f $$(docker volume ls -q)
 	rm -rf srcs/db-data
+	rm -rf srcs/wp
 	docker rmi -f $$(docker images -aq)
 	@echo
 	@echo "containers images volumes"

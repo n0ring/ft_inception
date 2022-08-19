@@ -1,15 +1,47 @@
 version: '3'
 
 services:
+  wordpress:
+    build: requirements/wordpress
+    # restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - wp:/var/www/html/wordpress
+    networks:
+      - app
+    depends_on:
+      - mariadb
+    container_name: wordpress
+    env_file:
+      - .env
+
+  nginx:
+    build: requirements/nginx
+    # restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - wp:/var/www/html/wordpress
+    depends_on:
+      - wordpress
+    networks:
+      - app
+    container_name: nginx
+
   mariadb:
     build: requirements/mariadb
-    restart: always
+    # restart: always
     env_file: 
       .env
     ports:
       - "3306:3306"
     volumes:
       - data-db:/var/lib/mysql
+    networks:
+      - app
+    container_name: mariadb
 
 volumes:
   data-db:
@@ -18,8 +50,16 @@ volumes:
       type: none
       o: bind
       device: /Users/aleksandr/Desktop/21/ft_inception/srcs/db-data
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/aleksandr/Desktop/21/ft_inception/srcs/wp
 
-
+networks:
+  app: 
+    driver: bridge
 
 
       # change to /home/namina/data/db:/var/lib/mysql

@@ -4,7 +4,7 @@ CREATE USER 'namina'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'namina'@'%';
 
 CREATE USER 'wordpress_user'@'%' IDENTIFIED BY 'password';
-GRANT SELECT, INSERT, UPDATE, DELETE, FILE ON *.* TO 'wordpress_user'@'%';
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wordpress_user'@'%';
 
 FLUSH PRIVILEGES;
 
