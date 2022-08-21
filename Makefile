@@ -46,6 +46,7 @@ wp:
 
 clean: down rm  
 	docker volume rm -f $$(docker volume ls -q)
+	docker network rm -f $$(docker network ls -q)
 	rm -rf srcs/db-data
 	rm -rf srcs/wp
 	docker rmi -f $$(docker images -aq)
