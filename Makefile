@@ -44,6 +44,15 @@ nginx:
 wp: 
 	docker exec -it wordpress bash
 
+clean: down rm  
+	docker volume rm -f $$(docker volume ls -q)
+	rm -rf srcs/db-data
+	rm -rf srcs/wp
+	docker rmi -f $$(docker images -aq)
+	@echo
+	@echo "containers images volumes"
+	@echo "--------deleted----------"
+
 fclean: down rm  
 	docker system prune -a --force
 	docker volume rm -f $$(docker volume ls -q)
