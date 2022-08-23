@@ -21,7 +21,6 @@ services:
     # restart: always
     ports:
       - "443:443"
-      - "80:80"
     volumes:
       - wp:/var/www/html/wordpress
     depends_on:
@@ -49,13 +48,21 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/aleksandr/Desktop/21/ft_inception/srcs/db-data
+      # device: /root/ft_inception/srcs/db-data
+      device: /home/namina/db-data
   wp:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /Users/aleksandr/Desktop/21/ft_inception/srcs/wp
+      device: /home/namina/wp
+      # device: /root/ft_inception/srcs/wp
+      
+
+
+
+
+
 
 networks:
   app: 

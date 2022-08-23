@@ -1,6 +1,6 @@
 COMPOSE_FILE = srcs/docker-compose.yml
 
-COMPOSE_CMD_F = docker-compose -f
+COMPOSE_CMD_F = docker compose -f
 
 UP				= up -d
 # START			= start -d
@@ -13,8 +13,11 @@ build:
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) build
 
 up:
-	@mkdir -p srcs/db-data
-	@mkdir -p srcs/wp
+	# @mkdir -p srcs/db-data
+	# @mkdir -p srcs/wp
+	
+	@mkdir -p /home/namina/db-data
+	@mkdir -p /home/namina/wp
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
 
 stop:
