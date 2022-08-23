@@ -46,23 +46,20 @@ wp:
 
 clean: down rm  
 	docker volume rm -f $$(docker volume ls -q)
-	docker network rm -f $$(docker network ls -q)
-	rm -rf srcs/db-data
-	rm -rf srcs/wp
-	docker rmi -f $$(docker images -aq)
-	@echo
-	@echo "containers images volumes"
-	@echo "--------deleted----------"
+	docker system prune -f --volumes
+	# rm -rf srcs/db-data
+	# rm -rf srcs/wp
+	
+
 
 fclean: down rm  
-	docker system prune -a --force
 	docker volume rm -f $$(docker volume ls -q)
+	docker system prune -a --force
+	docker system prune -f --volumes
 	rm -rf srcs/db-data
 	rm -rf srcs/wp
-	docker rmi -f $$(docker images -aq)
-	@echo
-	@echo "containers images volumes"
-	@echo "--------deleted----------"
+	
+
 
 rebuild: down all
 
