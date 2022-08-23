@@ -3,7 +3,7 @@ version: '3'
 services:
   wordpress:
     build: requirements/wordpress
-    # restart: always
+    restart: always
     ports:
       - "9000:9000"
     volumes:
@@ -18,9 +18,10 @@ services:
 
   nginx:
     build: requirements/nginx
-    # restart: always
+    restart: always
     ports:
       - "443:443"
+      - "80:80"
     volumes:
       - wp:/var/www/html/wordpress
     depends_on:
@@ -31,7 +32,7 @@ services:
 
   mariadb:
     build: requirements/mariadb
-    # restart: always
+    restart: always
     env_file: 
       .env
     ports:
@@ -48,7 +49,6 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      # device: /root/ft_inception/srcs/db-data
       device: /home/namina/db-data
   wp:
     driver: local
@@ -56,12 +56,6 @@ volumes:
       type: none
       o: bind
       device: /home/namina/wp
-      # device: /root/ft_inception/srcs/wp
-      
-
-
-
-
 
 
 networks:
