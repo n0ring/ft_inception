@@ -52,6 +52,9 @@ clean: down rm
 	docker system prune -f --volumes
 	# rm -rf srcs/db-data
 	# rm -rf srcs/wp
+	rm -rf /home/namina/wp
+	rm -rf /home/namina/db-data
+
 	
 
 
@@ -59,8 +62,8 @@ fclean: down rm
 	docker volume rm -f $$(docker volume ls -q)
 	docker system prune -a --force
 	docker system prune -f --volumes
-	rm -rf srcs/db-data
-	rm -rf srcs/wp
+	rm -rf /home/namina/wp
+	rm -rf /home/namina/db-data
 	
 
 

@@ -3,8 +3,10 @@
 
 if [ ! -f /var/www/html/wordpress/wp-config.php ];
 then
+
+date > /home/namina/log
 chown -R www-data:www-data /var/www/html/wordpress
-cp /conf /var/www/html/wordpress/wp-config.php
+cp /conf /var/www/html/wordpress/wp-config.php 
 cat /www.conf > /etc/php/7.3/fpm/pool.d/www.conf
 cd /var/www/html/wordpress
 wp core install --allow-root --url=namina.42.fr\
@@ -13,6 +15,7 @@ wp core install --allow-root --url=namina.42.fr\
  --path=/var/www/html/wordpress > resOfWPcore
 WORDPRESS_SETTED=true
 wp theme install --allow-root inspiro --activate --path=/var/www/html/wordpress/
+echo "start.sh end work" > /log 
 fi
 
 
