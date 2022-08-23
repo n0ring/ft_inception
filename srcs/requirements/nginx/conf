@@ -34,3 +34,15 @@ server {
 	}
 }
 
+server {
+	
+	listen 8888;
+
+	root /var/www/html/dark_forest;
+	index index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
+
