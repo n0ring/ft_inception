@@ -27,17 +27,9 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO $fastcgi_path_info;
 	}
-}
 
-server {
-	
-	listen 8888;
-
-	root /var/www/html/dark-forest;
-	index index.html;
-
-	location / {
-		try_files $uri $uri/ =404;
+	location /df {
+		alias /tools/dark-forest/;
 	}
-}
 
+}
