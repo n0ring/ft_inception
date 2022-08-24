@@ -22,8 +22,6 @@ services:
     restart: always
     ports:
       - "443:443"
-      - "80:80"
-      # - "8888:8888"
     volumes:
       - wp:/var/www/html/wordpress
     depends_on:
@@ -60,13 +58,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/namina/db-data
+      device: /home/namina/data/db-data
   wp:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/namina/wp
+      device: /home/namina/data/wp
 
 
 networks:

@@ -13,11 +13,8 @@ build:
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) build
 
 up:
-	# @mkdir -p srcs/db-data
-	# @mkdir -p srcs/wp
-	
-	@mkdir -p /home/namina/db-data
-	@mkdir -p /home/namina/wp
+	@mkdir -p /home/namina/data/db-data
+	@mkdir -p /home/namina/data/wp
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
 
 stop:
@@ -55,8 +52,8 @@ clean: down rm
 	docker system prune -f --volumes
 	# rm -rf srcs/db-data
 	# rm -rf srcs/wp
-	rm -rf /home/namina/wp
-	rm -rf /home/namina/db-data
+	rm -rf /home/namina/data/wp
+	rm -rf /home/namina/data/db-data
 
 	
 
@@ -65,8 +62,8 @@ fclean: down rm
 	docker volume rm -f $$(docker volume ls -q)
 	docker system prune -a --force
 	docker system prune -f --volumes
-	rm -rf /home/namina/wp
-	rm -rf /home/namina/db-data
+	rm -rf /home/namina/data/wp
+	rm -rf /home/namina/data/db-data
 	
 
 
