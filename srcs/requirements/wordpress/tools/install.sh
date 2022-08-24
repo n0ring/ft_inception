@@ -6,7 +6,9 @@ mkdir -p /run/php
 
 
 apt update
-apt install -y php-fpm php7.3 php-mysqli wget vim mariadb-client
+apt install -y php-fpm php7.3 php-mysqli wget vim mariadb-client php-redis
+
+phpenmod -v 7.4 -s ALL redis
 
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod 7777 wp-cli.phar

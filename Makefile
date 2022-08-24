@@ -47,6 +47,9 @@ nginx:
 wp: 
 	docker exec -it wordpress bash
 
+redis:
+	docker exec -it redis bash
+
 clean: down rm  
 	docker volume rm -f $$(docker volume ls -q)
 	docker system prune -f --volumes
@@ -67,7 +70,7 @@ fclean: down rm
 	
 
 
-rebuild: down all
+re: clean up
 
 
 

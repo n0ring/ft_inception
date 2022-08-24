@@ -13,7 +13,9 @@ wp core install --allow-root --url=namina.42.fr\
  --admin_password=strongpassword --admin_email=info@example.com\
  --path=/var/www/html/wordpress > resOfWPcore
 wp theme install --allow-root inspiro --activate --path=/var/www/html/wordpress/
+wp plugin install redis-cache  --allow-root --activate
+wp plugin update --all --allow-root
 fi
 
-
+wp redis enable --allow-root --path=/var/www/html/wordpress/
 /usr/sbin/php-fpm7.3 --nodaemonize

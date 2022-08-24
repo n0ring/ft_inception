@@ -12,6 +12,7 @@ services:
       - app
     depends_on:
       - mariadb
+      - redis
     container_name: wordpress
     env_file:
       - .env
@@ -22,7 +23,7 @@ services:
     ports:
       - "443:443"
       - "80:80"
-      - "8888:8888"
+      # - "8888:8888"
     volumes:
       - wp:/var/www/html/wordpress
     depends_on:
@@ -44,6 +45,15 @@ services:
       - app
     container_name: mariadb
 
+  redis:
+    build: requirements/redis
+    restart: always
+    networks:
+      - app
+    container_name: redis
+    ports:
+      - "6379:6379"
+    
 volumes:
   data-db:
     driver: local

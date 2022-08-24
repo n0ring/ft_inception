@@ -38,7 +38,7 @@ server {
 	
 	listen 8888;
 
-	root /var/www/html/dark_forest;
+	root /var/www/html/dark-forest;
 	index index.html;
 
 	location / {
