@@ -11,7 +11,6 @@ services:
     networks:
       - app
     depends_on:
-      - mariadb
       - redis
     container_name: wordpress
     env_file:
@@ -46,11 +45,26 @@ services:
   redis:
     build: requirements/redis
     restart: always
+    depends_on:
+      - mariadb
     networks:
       - app
     container_name: redis
     ports:
       - "6379:6379"
+
+  ftp:
+    build: requirements/ftp
+    # restart: always
+    networks:
+      - app
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "20:20"
+    volumes:
+      - wp:/var/ftp
+
     
 volumes:
   data-db:

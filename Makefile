@@ -47,6 +47,10 @@ wp:
 redis:
 	docker exec -it redis bash
 
+
+ftp:
+	docker exec -it ftp bash
+
 clean: down rm  
 	docker volume rm -f $$(docker volume ls -q)
 	docker system prune -f --volumes
@@ -67,7 +71,7 @@ fclean: down rm
 	
 
 
-re: clean up
+re: down clean build up
 
 
 
