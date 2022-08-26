@@ -8,6 +8,7 @@ services:
       - "9000:9000"
     volumes:
       - wp:/var/www/html/wordpress
+      - adm:/var/www/html/adminer
     networks:
       - app
     depends_on:
@@ -21,8 +22,10 @@ services:
     restart: always
     ports:
       - "443:443"
+      - "6969:6969"
     volumes:
       - wp:/var/www/html/wordpress
+      - adm:/var/www/html/adminer
     depends_on:
       - wordpress
     networks:
@@ -65,6 +68,20 @@ services:
     volumes:
       - wp:/var/ftp
 
+  adminer:
+    build: requirements/adminer
+    # restart: always
+    # ports:
+    #   - "9000:9000"
+    volumes:
+      - adm:/var/www/html/adminer
+    networks:
+      - app
+    depends_on:
+      - redis
+    container_name: adminer
+    env_file:
+      - .env
     
 volumes:
   data-db:
@@ -80,6 +97,12 @@ volumes:
       o: bind
       device: /home/namina/data/wp
 
+  adm:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/namina/data/adm
 
 networks:
   app: 

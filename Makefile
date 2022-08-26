@@ -15,6 +15,7 @@ build:
 up:
 	@mkdir -p /home/namina/data/db-data
 	@mkdir -p /home/namina/data/wp
+	@mkdir -p /home/namina/data/adm
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
 
 stop:
@@ -51,6 +52,9 @@ redis:
 ftp:
 	docker exec -it ftp bash
 
+adm:
+	docker exec -it adminer bash
+
 clean: down rm  
 	docker volume rm -f $$(docker volume ls -q)
 	docker system prune -f --volumes
@@ -58,6 +62,7 @@ clean: down rm
 	# rm -rf srcs/wp
 	rm -rf /home/namina/data/wp
 	rm -rf /home/namina/data/db-data
+	rm -rf /home/namina/data/adm
 
 	
 
@@ -68,6 +73,7 @@ fclean: down rm
 	docker system prune -f --volumes
 	rm -rf /home/namina/data/wp
 	rm -rf /home/namina/data/db-data
+	rm -rf /home/namina/data/adm
 	
 
 
