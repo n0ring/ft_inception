@@ -13,6 +13,7 @@ wp core install --allow-root --url=namina.42.fr\
  --path=/var/www/html/wordpress
 wp theme install --allow-root inspiro --activate --path=/var/www/html/wordpress/
 chown -R www-data:www-data /var/www/html/wordpress
+chmod o+rwx /var/www/html/wordpress
 wp plugin install redis-cache  --allow-root --activate
 wp plugin update --all --allow-root
 fi
