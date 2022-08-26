@@ -57,7 +57,7 @@ services:
 
   ftp:
     build: requirements/ftp
-    # restart: always
+    restart: always
     networks:
       - app
     container_name: ftp
@@ -69,7 +69,7 @@ services:
 
   adminer:
     build: requirements/adminer
-    # restart: always
+    restart: always
     ports:
       - "4443:4443"
     volumes:
@@ -81,6 +81,12 @@ services:
     container_name: adminer
     env_file:
       - .env
+
+  portainer:
+    build: requirements/portainer
+    networks:
+      - app
+    container_name: portainer
     
 volumes:
   data-db:
@@ -107,7 +113,3 @@ networks:
   app: 
     driver: bridge
 
-
-      # change to /home/namina/data/db:/var/lib/mysql
-  # nginx:
-  #   build: requirements/nginx
