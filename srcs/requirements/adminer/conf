@@ -1,20 +1,14 @@
 
 server {
 
-	listen 443 ssl default_server;
-	listen [::]:443 ssl default_server;
+	listen 4443 ssl default_server;
+	listen [::]:4443 ssl default_server;
 	ssl_certificate     /etc/ssl/certs/ca.crt;
 	ssl_certificate_key /etc/ssl/private/ca.key;
 	ssl_protocols       TLSv1.2 TLSv1.3;
 
-	root /var/www/html/wordpress;
-	index index.php index.html;
-
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
+	root /var/www/html/adminer;
+	index adminer.php;
 
 	# pass PHP scripts to FastCGI server
 	#
@@ -22,14 +16,10 @@ server {
 		try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass wordpress:9000;
-        fastcgi_index index.php;
+        # fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO $fastcgi_path_info;
-	}
-
-	location /df {
-		alias /tools/dark-forest/;
 	}
 
 }

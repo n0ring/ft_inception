@@ -22,7 +22,6 @@ services:
     restart: always
     ports:
       - "443:443"
-      - "6969:6969"
     volumes:
       - wp:/var/www/html/wordpress
       - adm:/var/www/html/adminer
@@ -71,8 +70,8 @@ services:
   adminer:
     build: requirements/adminer
     # restart: always
-    # ports:
-    #   - "9000:9000"
+    ports:
+      - "4443:4443"
     volumes:
       - adm:/var/www/html/adminer
     networks:
