@@ -1,18 +1,52 @@
 version: '3'
 
+
+networks:
+  app: 
+    driver: bridge
+
+volumes:
+  data-db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/namina/data/db-data
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/namina/data/wp
+  adm:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/namina/data/adm
+
 services:
+  mariadb:
+    build: requirements/mariadb
+    restart: always
+    env_file: 
+      .env
+    volumes:
+      - data-db:/var/lib/mysql
+    networks:
+      - app
+    container_name: mariadb
+
   wordpress:
     build: requirements/wordpress
     restart: always
-    ports:
-      - "9000:9000"
     volumes:
       - wp:/var/www/html/wordpress
       - adm:/var/www/html/adminer
     networks:
       - app
     depends_on:
-      - redis
+      - mariadb
     container_name: wordpress
     env_file:
       - .env
@@ -29,26 +63,15 @@ services:
       - wordpress
     networks:
       - app
+    env_file:
+      - .env
     container_name: nginx
-
-  mariadb:
-    build: requirements/mariadb
-    restart: always
-    env_file: 
-      .env
-    ports:
-      - "3306:3306"
-    volumes:
-      - data-db:/var/lib/mysql
-    networks:
-      - app
-    container_name: mariadb
 
   redis:
     build: requirements/redis
     restart: always
     depends_on:
-      - mariadb
+      - nginx
     networks:
       - app
     container_name: redis
@@ -82,34 +105,11 @@ services:
     env_file:
       - .env
 
-  portainer:
-    build: requirements/portainer
-    networks:
-      - app
-    container_name: portainer
+  # portainer:
+  #   build: requirements/portainer
+  #   networks:
+  #     - app
+  #   container_name: portainer
     
-volumes:
-  data-db:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/namina/data/db-data
-  wp:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/namina/data/wp
 
-  adm:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/namina/data/adm
-
-networks:
-  app: 
-    driver: bridge
 
