@@ -78,8 +78,8 @@ services:
     networks:
       - app
     container_name: redis
-    ports:
-      - "6379:6379"
+    # ports:
+    #   - "6379:6379"
   ftp:
     build: requirements/bonus/ftp
     restart: always

@@ -1,5 +1,7 @@
 CREATE DATABASE IF NOT EXISTS wordpress_db;
 
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+
 CREATE USER 'namina'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'namina'@'%';
 

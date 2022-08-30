@@ -61,6 +61,10 @@ adm:
 port:
 	$(DOCKER_CMD_F) exec -it portainer bash
 
+net:
+	$(DOCKER_CMD_F) network inspect srcs_app
+
+
 clean: down rm  
 	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
 	$(DOCKER_CMD_F) system prune -f --volumes
