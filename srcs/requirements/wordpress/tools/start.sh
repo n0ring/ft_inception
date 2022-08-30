@@ -19,12 +19,11 @@ wp core install --allow-root --url=namina.42.fr\
  --admin_password=password --admin_email=namina@42.fr
 
 wp user create --allow-root namina42   namina42@42.fr --role=author --user_pass=password
-# # wp theme install --allow-root inspiro --activate --path=/var/www/html/wordpress/
+wp theme install --allow-root inspiro --activate --path=/var/www/html/wordpress/
 
 
 wp plugin install redis-cache --activate --allow-root
 wp plugin update --all --allow-root
-# wp plugin activate redis-cache --allow-root
 fi
 
 wp redis enable --allow-root

@@ -1,9 +1,9 @@
-COMPOSE_FILE = srcs/docker-compose.yml
 
-COMPOSE_CMD_F = docker compose -f
-
+COMPOSE_FILE	= srcs/docker-compose.yml
+COMPOSE_CMD_F	= sudo docker compose -f
+DOCKER_CMD_F	= sudo docker
 UP				= up -d
-# START			= start -d
+USER			= namina
 
 .PHONY: all build ps down
 
@@ -13,10 +13,13 @@ build:
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) build
 
 up:
-	@mkdir -p /home/namina/data/db-data
-	@mkdir -p /home/namina/data/wp
-	@mkdir -p /home/namina/data/adm
-	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
+	@sudo mkdir -p /home/$(USER)/data/db-data
+	@sudo mkdir -p /home/$(USER)/data/wp
+	@sudo mkdir -p /home/$(USER)/data/adminer
+	@sudo mkdir -p /home/$(USER)/data/portainer
+	@echo "volume dirs was created!"
+	@$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
+
 
 stop:
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) stop
@@ -34,46 +37,47 @@ rm: down
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) rm
 
 in:
-	docker exec -it $$(docker ps -q) /bin/bash
+	$(DOCKER_CMD_F) exec -it $$($(DOCKER_CMD_F) ps -q) /bin/bash
 
 mariadb: 
-	docker exec -it mariadb bash
+	$(DOCKER_CMD_F) exec -it mariadb bash
 
 nginx: 
-	docker exec -it nginx bash
+	$(DOCKER_CMD_F) exec -it nginx bash
 
 wp: 
-	docker exec -it wordpress bash
+	$(DOCKER_CMD_F) exec -it wordpress bash
 
 redis:
-	docker exec -it redis bash
+	$(DOCKER_CMD_F) exec -it redis bash
 
 
 ftp:
-	docker exec -it ftp bash
+	$(DOCKER_CMD_F) exec -it ftp bash
 
 adm:
-	docker exec -it adminer bash
+	$(DOCKER_CMD_F) exec -it adminer bash
+
+port:
+	$(DOCKER_CMD_F) exec -it portainer bash
 
 clean: down rm  
-	docker volume rm -f $$(docker volume ls -q)
-	docker system prune -f --volumes
-	# rm -rf srcs/db-data
-	# rm -rf srcs/wp
-	rm -rf /home/namina/data/wp
-	rm -rf /home/namina/data/db-data
-	rm -rf /home/namina/data/adm
+	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
+	$(DOCKER_CMD_F) system prune -f --volumes
+	sudo rm -rf /home/$(USER)/data/wp
+	sudo rm -rf /home/$(USER)/data/db-data
+	sudo rm -rf /home/$(USER)/data/adminer
+	sudo rm -rf /home/$(USER)/data/portainer
 
 	
-
-
 fclean: down rm  
-	docker volume rm -f $$(docker volume ls -q)
-	docker system prune -a --force
-	docker system prune -f --volumes
-	rm -rf /home/namina/data/wp
-	rm -rf /home/namina/data/db-data
-	rm -rf /home/namina/data/adm
+	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
+	$(DOCKER_CMD_F) system prune -a --force
+	$(DOCKER_CMD_F) system prune -f --volumes
+	sudo rm -rf /home/$(USER)/data/wp
+	sudo rm -rf /home/$(USER)/data/db-data
+	sudo rm -rf /home/$(USER)/data/adminer
+	sudo rm -rf /home/$(USER)/data/portainer
 	
 
 
