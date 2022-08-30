@@ -28,8 +28,8 @@ server {
         fastcgi_param PATH_INFO $fastcgi_path_info;
 	}
 
-	location /df {
-		alias /tools/dark-forest/;
+	location /static {
+		alias /var/www/html/static-site/;
 	}
 
 }

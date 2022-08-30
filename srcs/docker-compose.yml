@@ -71,7 +71,7 @@ services:
       - .env
     container_name: nginx
   redis:
-    build: requirements/redis
+    build: requirements/bonus/redis
     restart: always
     depends_on:
       - nginx
@@ -81,7 +81,7 @@ services:
     ports:
       - "6379:6379"
   ftp:
-    build: requirements/ftp
+    build: requirements/bonus/ftp
     restart: always
     networks:
       - app
@@ -92,7 +92,7 @@ services:
     volumes:
       - wp:/var/ftp
   adminer:
-    build: requirements/adminer
+    build: requirements/bonus/adminer
     restart: always
     ports:
       - "4443:4443"
@@ -106,7 +106,7 @@ services:
     env_file:
       - .env
   portainer:
-    build: requirements/portainer
+    build: requirements/bonus/portainer
     restart: always
     ports:
       - "9443:9443"

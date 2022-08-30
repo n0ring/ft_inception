@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir -p /var/www/html/
+mv tools/static-site /var/www/html/static-site
+chmod -R 777 /var/www/html/static-site
 apt update
 apt install -y vim nginx openssl
 openssl genrsa -out ca.key 2048
