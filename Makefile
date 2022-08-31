@@ -18,7 +18,7 @@ up:
 	@sudo mkdir -p /home/$(USER)/data/adminer
 	@sudo mkdir -p /home/$(USER)/data/portainer
 	@echo "volume dirs was created!"
-	@$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
+	@$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP) --build
 
 
 stop:

@@ -62,7 +62,6 @@ services:
       - "443:443"
     volumes:
       - wp:/var/www/html/wordpress
-      - adm:/var/www/html/adminer
     depends_on:
       - wordpress
     networks:
@@ -78,8 +77,6 @@ services:
     networks:
       - app
     container_name: redis
-    # ports:
-    #   - "6379:6379"
   ftp:
     build: requirements/bonus/ftp
     restart: always

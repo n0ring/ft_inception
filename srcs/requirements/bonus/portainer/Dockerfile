@@ -6,8 +6,6 @@ RUN apk update && \
     apk upgrade && \
     apk add bash bind-tools ca-certificates curl jq tar
 
-RUN mkdir -p ${PORTAINER_HOME} 
-
 RUN mkdir -p ${PORTAINER_HOME} && \
     addgroup -S portainer && \
     adduser -S -D -g "" -G portainer -s /bin/sh -h ${PORTAINER_HOME} portainer && \
@@ -19,5 +17,3 @@ RUN curl -sSL https://github.com/portainer/portainer/releases/download/2.14.2/po
 RUN chmod 777 ${PORTAINER_HOME} 
 
 CMD ["/usr/local/portainer/portainer"]
-# 
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
