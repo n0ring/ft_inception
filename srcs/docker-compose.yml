@@ -11,25 +11,25 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/${SUDO_USER}/data/db-data
+      device: ${DATA_PATH}/db-data
   wp:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/${SUDO_USER}/data/wp
+      device: ${DATA_PATH}/wp
   adm:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/${SUDO_USER}/data/adminer
+      device: ${DATA_PATH}/adminer
   portainer_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/${SUDO_USER}/data/portainer
+      device: ${DATA_PATH}/portainer
 
 services:
   mariadb:

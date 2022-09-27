@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Mon Aug 22 22:23:17 2022
+# Make data base, printed on Tue Sep 27 13:28:17 2022
 
 # Variables
 
@@ -24,7 +24,7 @@ LC_CTYPE =
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/aleksandr/Desktop/21/ft_inception
+CURDIR := /Users/aleksandr/Desktop/ft_inception
 # makefile
 SHELL = /bin/sh
 # environment
@@ -35,14 +35,16 @@ _ = /usr/bin/make
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 5)
 UP = up -d
+# makefile (from `Makefile', line 4)
+DOCKER_CMD_F = docker
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /
 # makefile (from `Makefile', line 3)
-COMPOSE_CMD_F = docker-compose -f
+COMPOSE_CMD_F = docker compose -f
 # environment
-PATH = /Users/aleksandr/.brew/opt/openssl@3/bin:/Users/aleksandr/.brew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+PATH = /Users/aleksandr/.brew/opt/openssl@3/bin:/Users/aleksandr/.brew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -58,7 +60,7 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.hpf9D40SLj/Listeners
 # environment
 HOMEBREW_TEMP = /tmp/aleksandr/Homebrew/Temp
 # environment
-PWD = /Users/aleksandr/Desktop/21/ft_inception
+PWD = /Users/aleksandr/Desktop/ft_inception
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -68,7 +70,7 @@ HOME = /Users/aleksandr
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/aleksandr/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/aleksandr/Library/Application Support/Code/CachedData/74b1f979648cc44d385a2286793c226e611f59e7
 # environment
 LOGNAME = aleksandr
 # environment
@@ -91,7 +93,7 @@ HOMEBREW_CACHE = /tmp/aleksandr/Homebrew/Caches
 SHLVL = 1
 # default
 MAKE_VERSION := 3.81
-# environment
+# makefile (from `Makefile', line 6)
 USER = aleksandr
 # makefile
 .DEFAULT_GOAL := all
@@ -99,7 +101,9 @@ USER = aleksandr
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
-# makefile (from `Makefile', line 1)
+# makefile (from `Makefile', line 8)
+DATA_PATH = ./srcs/data
+# makefile (from `Makefile', line 2)
 COMPOSE_FILE = srcs/docker-compose.yml
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
@@ -110,7 +114,7 @@ TMPDIR = /var/folders/92/8y734q4d369c461bfcp_vdhr0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/aleksandr/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/aleksandr/Library/Application Support/Code/1.71.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -120,7 +124,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.76460830.76460836
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.79015642.79015648
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -150,9 +154,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 24543
+VSCODE_PID = 23012
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=1/99=1%
+# Load=72/1024=7%, Rehash=0, Collisions=1/106=1%
 
 # Pattern-specific Variable Values
 
@@ -160,9 +164,9 @@ VSCODE_PID = 24543
 
 # Directories
 
-# . (device 16777220, inode 76688740): 8 files, no impossibilities.
+# . (device 16777220, inode 79267960): 7 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 7 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -174,8 +178,16 @@ stop:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 27):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) stop
+	
+
+redis:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 54):
+	$(DOCKER_CMD_F) exec -it redis bash
 	
 
 all: up
@@ -186,13 +198,13 @@ all: up
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/9=0%
 
 im:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
+#  commands to execute (from `Makefile', line 36):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) images
 	
 
@@ -200,8 +212,16 @@ in:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 36):
-	docker exec -it $$(docker ps -q) /bin/bash
+#  commands to execute (from `Makefile', line 42):
+	$(DOCKER_CMD_F) exec -it $$($(DOCKER_CMD_F) ps -q) /bin/bash
+	
+
+net:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 67):
+	$(DOCKER_CMD_F) network inspect srcs_app
 	
 
 .PHONY: all build ps down
@@ -232,19 +252,22 @@ up:
 # automatic
 # ? := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=4/13=31%
-#  commands to execute (from `Makefile', line 16):
-	@mkdir -p srcs/db-data
-	@mkdir -p srcs/wp
-	$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP)
+# Load=8/32=25%, Rehash=0, Collisions=4/17=24%
+#  commands to execute (from `Makefile', line 18):
+	@mkdir -p $(DATA_PATH)/db-data
+	@mkdir -p $(DATA_PATH)/wp
+	@mkdir -p $(DATA_PATH)/adminer
+	@mkdir -p $(DATA_PATH)/portainer
+	@echo "volume dirs was created!"
+	@$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP) --build
 	
 
 wp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 45):
-	docker exec -it wordpress bash
+#  commands to execute (from `Makefile', line 51):
+	$(DOCKER_CMD_F) exec -it wordpress bash
 	
 
 # Not a target:
@@ -256,23 +279,26 @@ wp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-21 20:21:53
+#  Last modified 2022-09-26 19:49:05
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-rebuild: down all
+port:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  commands to execute (from `Makefile', line 64):
+	$(DOCKER_CMD_F) exec -it portainer bash
+	
 
 build:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 13):
+#  commands to execute (from `Makefile', line 15):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) build
 	
 
@@ -280,16 +306,33 @@ fclean: down rm
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 56):
-	docker volume rm -f $$(docker volume ls -q)
-	docker system prune -a --force
-	docker system prune -f --volumes
-	rm -rf srcs/db-data
-	rm -rf srcs/wp
+#  commands to execute (from `Makefile', line 81):
+	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
+	$(DOCKER_CMD_F) system prune -a --force
+	$(DOCKER_CMD_F) system prune -f --volumes
+	rm -rf  $(DATA_PATH)/wp
+	rm -rf  $(DATA_PATH)/db-data
+	rm -rf  $(DATA_PATH)/adminer
+	rm -rf  $(DATA_PATH)/portainer
+	rm -rf $(DATA_PATH)
 	
 
 # Not a target:
 .DEFAULT:
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+adm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 61):
+	$(DOCKER_CMD_F) exec -it adminer bash
+	
+
+re: down clean build up
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -298,18 +341,21 @@ clean: down rm
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 48):
-	docker volume rm -f $$(docker volume ls -q)
-	docker system prune -f --volumes
-	# rm -rf srcs/db-data
-	# rm -rf srcs/wp
+#  commands to execute (from `Makefile', line 71):
+	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
+	# $(DOCKER_CMD_F) system prune -f --volumes
+	rm -rf $(DATA_PATH)
+	# rm -rf  $(DATA_PATH)/wp
+	# rm -rf  $(DATA_PATH)/db-data
+	# rm -rf  $(DATA_PATH)/adminer
+	# rm -rf  $(DATA_PATH)/portainer
 	
 
 rm: down
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 33):
+#  commands to execute (from `Makefile', line 39):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) rm
 	
 
@@ -317,17 +363,24 @@ mariadb:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 39):
-	docker exec -it mariadb bash
+#  commands to execute (from `Makefile', line 45):
+	$(DOCKER_CMD_F) exec -it mariadb bash
+	
+
+ftp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 58):
+	$(DOCKER_CMD_F) exec -it ftp bash
 	
 
 nginx:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 42):
- 
-	docker exec -it nginx bash
+#  commands to execute (from `Makefile', line 48):
+	$(DOCKER_CMD_F) exec -it nginx bash
 	
 
 down: stop
@@ -335,7 +388,7 @@ down: stop
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 27):
+#  commands to execute (from `Makefile', line 33):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) down
 	
 
@@ -344,12 +397,12 @@ ps:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 24):
+#  commands to execute (from `Makefile', line 30):
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE)  ps -a
 	
 
 # files hash-table stats:
-# Load=19/1024=2%, Rehash=0, Collisions=3/46=7%
+# Load=24/1024=2%, Rehash=0, Collisions=3/53=6%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -361,6 +414,6 @@ ps:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug 22 22:23:17 2022
+# Finished Make data base on Tue Sep 27 13:28:17 2022
 
  

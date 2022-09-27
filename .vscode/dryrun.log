@@ -1,7 +1,10 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/aleksandr/Desktop/21/ft_inception'
-mkdir -p srcs/db-data
-mkdir -p srcs/wp
-docker-compose -f srcs/docker-compose.yml up -d
-make: Leaving directory `/Users/aleksandr/Desktop/21/ft_inception'
+make: Entering directory `/Users/aleksandr/Desktop/ft_inception'
+mkdir -p ./srcs/data/db-data
+mkdir -p ./srcs/data/wp
+mkdir -p ./srcs/data/adminer
+mkdir -p ./srcs/data/portainer
+echo "volume dirs was created!"
+docker compose -f srcs/docker-compose.yml up -d --build
+make: Leaving directory `/Users/aleksandr/Desktop/ft_inception'
  

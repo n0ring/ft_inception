@@ -14,7 +14,7 @@ wp core download --allow-root
 mv /conf /var/www/html/wordpress/wp-config.php 
 chmod 777 /var/www/html/wordpress/wp-config.php
 
-wp core install --allow-root --url=namina.42.fr\
+wp core install --allow-root --url=${HOST_NAME}\
  --title=namina.42.fr --admin_user=${MYSQL_USER}\
  --admin_password=${MYSQL_PASSWORD} --admin_email=namina@42.fr
 

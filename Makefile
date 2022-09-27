@@ -1,9 +1,11 @@
 
 COMPOSE_FILE	= srcs/docker-compose.yml
-COMPOSE_CMD_F	= sudo docker compose -f
-DOCKER_CMD_F	= sudo docker
+COMPOSE_CMD_F	= docker compose -f
+DOCKER_CMD_F	= docker
 UP				= up -d
-USER			= namina
+USER			= aleksandr
+
+DATA_PATH		= ./srcs/data
 
 .PHONY: all build ps down
 
@@ -13,10 +15,10 @@ build:
 	$(COMPOSE_CMD_F) $(COMPOSE_FILE) build
 
 up:
-	@sudo mkdir -p /home/$(USER)/data/db-data
-	@sudo mkdir -p /home/$(USER)/data/wp
-	@sudo mkdir -p /home/$(USER)/data/adminer
-	@sudo mkdir -p /home/$(USER)/data/portainer
+	@mkdir -p $(DATA_PATH)/db-data
+	@mkdir -p $(DATA_PATH)/wp
+	@mkdir -p $(DATA_PATH)/adminer
+	@mkdir -p $(DATA_PATH)/portainer
 	@echo "volume dirs was created!"
 	@$(COMPOSE_CMD_F) $(COMPOSE_FILE) $(UP) --build
 
@@ -65,23 +67,25 @@ net:
 	$(DOCKER_CMD_F) network inspect srcs_app
 
 
-clean: down rm  
+clean: 
 	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
 	$(DOCKER_CMD_F) system prune -f --volumes
-	sudo rm -rf /home/$(USER)/data/wp
-	sudo rm -rf /home/$(USER)/data/db-data
-	sudo rm -rf /home/$(USER)/data/adminer
-	sudo rm -rf /home/$(USER)/data/portainer
+	rm -rf $(DATA_PATH)
+	rm -rf  $(DATA_PATH)/wp
+	rm -rf  $(DATA_PATH)/db-data
+	rm -rf  $(DATA_PATH)/adminer
+	rm -rf  $(DATA_PATH)/portainer
 
 	
-fclean: down rm  
+fclean: 
 	$(DOCKER_CMD_F) volume rm -f $$($(DOCKER_CMD_F) volume ls -q)
 	$(DOCKER_CMD_F) system prune -a --force
 	$(DOCKER_CMD_F) system prune -f --volumes
-	sudo rm -rf /home/$(USER)/data/wp
-	sudo rm -rf /home/$(USER)/data/db-data
-	sudo rm -rf /home/$(USER)/data/adminer
-	sudo rm -rf /home/$(USER)/data/portainer
+	rm -rf  $(DATA_PATH)/wp
+	rm -rf  $(DATA_PATH)/db-data
+	rm -rf  $(DATA_PATH)/adminer
+	rm -rf  $(DATA_PATH)/portainer
+	rm -rf $(DATA_PATH)
 	
 
 

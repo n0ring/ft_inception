@@ -1,1 +1,1 @@
-{"buildTargets":[".PHONY","all","build","clean","down","fclean","im","in","mariadb","nginx","ps","rebuild","rm","stop","up","wp"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":[".PHONY","adm","all","build","clean","down","fclean","ftp","im","in","mariadb","net","nginx","port","ps","re","redis","rm","stop","up","wp"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
